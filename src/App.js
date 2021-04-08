@@ -3,7 +3,6 @@ import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Home from './component/home/Home.react'
 import Detail from './component/detail/Detail.react'
-import { createBrowserHistory as createHistory } from "history";
 
 function App() {
     return (

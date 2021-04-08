@@ -2,63 +2,97 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import './Home.react.css';
 
-const imageItem = {
-    id: 2014422,
-    width: 3024,
-    height: 3024,
-    url: "https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/",
-    photographer: "Joey Farina",
-    photographer_url: "https://www.pexels.com/@joey",
-    photographer_id: 680589,
-    avg_color: "#978E82",
-    src: {
-        original: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
-        large2x: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        large: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-        medium: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350",
-        small: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130",
-        portrait: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-        landscape: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-        tiny: "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
-    }
-};
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            apiKey: '563492ad6f9170000100000130526a041228439587b2d8847c4dc1bb',
-            items: [imageItem, imageItem, imageItem],
+            currentPage: 1,
+            perPage: 3,
+            query: "nature",
+            apiKey: '563492ad6f9170000100000179a991b0d3c642ad9e30ab7930fb9c21',
+            items: [],
         }
     }
 
-    componentDidMount() {
+    getNextData() {
+        this.setState({
+            currentPage: this.state.currentPage + 1
+        });
+        const requestOpt = {
+            // method: 'POST',
+            headers: {
+                Authorization: this.state.apiKey
+            },
+            // body: JSON.stringify({title: 'React POST Request Example'})
+        };
+        fetch("https://api.pexels.com/v1/search?" +
+            "page=" + this.state.currentPage +
+            "&query=" + this.state.query +
+            "&per_page=" + this.state.perPage, requestOpt)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                const images = {
+                    page: res.page,
+                    per_page: res.per_page,
+                    photos: res.photos,
+                    total_results: res.total_results,
+                    next_page: res.next_page
+                };
+                this.setState({
+                    items: this.state.items.concat(images.photos.map(function (item) {
+                        item.key = new Date();
+                        return item
+                    }))
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
+    componentDidMount() {
+        console.log("componentDidMount")
+        this.getNextData();
     }
 
     render() {
         return (
             <div className="container">
                 <ListImage items={this.state.items}/>
+                <SeeMore onClick={()=>{this.getNextData()}}/>
             </div>
         )
     }
 }
 
+function SeeMore(props) {
+    return (<div className="text-center">
+        <button className="btn btn-primary m-5" onClick={() => {
+            props.onClick()
+        }}>See more
+        </button>
+    </div>)
+}
+
 function ListImage(props) {
     const history = useHistory();
 
-    function viewDetail() {
-        history.push("/detail", {})
+    function viewDetail(item) {
+        console.log(item)
+        history.push("/detail", {
+            data: item
+        })
     }
 
     const items = props.items.map((item) =>
-        <div id="item">
+        <div id="item" key={item.id}>
             <div className="row p-1">
-                <div className="col-md-2" onClick={viewDetail}>
-                    <a>
-                        <img className="w-100 h-100" src={item.src.tiny} alt={"image"}/>
-                    </a>
+                <div className="col-md-2" onClick={() => {
+                    viewDetail(item)
+                }}>
+                    <img className="img-thumbnail" src={item.src.tiny} alt={"image"}/>
                 </div>
                 <div className="col-md-6">
                     <div>
@@ -67,13 +101,14 @@ function ListImage(props) {
                     <span>Photographer: {item.photographer}</span>
                 </div>
             </div>
-
         </div>
     );
 
     return (
         <div>
-            <h1>Image list</h1>
+            <div>
+                <h1 className="text-primary">Image list</h1>
+            </div>
             {items}
         </div>
     )
