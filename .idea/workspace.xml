@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2ec1d3f-43a0-40ad-bebb-0f9bcced855e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/component/detail/Detail.react.css" afterDir="false" />
+    <list default="true" id="c2ec1d3f-43a0-40ad-bebb-0f9bcced855e" name="Default Changelist" comment="Base function">
+      <change afterPath="$PROJECT_DIR$/src/api/images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/detail/Detail.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/detail/Detail.react.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/home/Home.react.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/home/Home.react.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/home/Home.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/home/Home.react.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -38,18 +38,19 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="nodejs.jest.jest_package" value="" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vietnq\WebstormProjects\testapp\src" />
+      <recent name="C:\Users\vietnq\WebstormProjects\testapp\src\component\test" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\vietnq\WebstormProjects\testapp\src\component\detail" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\vietnq\WebstormProjects\testapp\src\component\test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -64,7 +65,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="Jest.first display test">
     <configuration name="Link changes the class when hovered" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -75,6 +76,46 @@
       <test-file value="$PROJECT_DIR$/src/component/Link.react.test.js" />
       <test-names>
         <test-name value="Link changes the class when hovered" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Test App" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/App.test.js" />
+      <test-names>
+        <test-name value="Test App" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="first display test" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/App.test.js" />
+      <test-names>
+        <test-name value="first display test" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="see more.see more click" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/App.test.js" />
+      <test-names>
+        <test-name value="see more" />
+        <test-name value="see more click" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -93,6 +134,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.first display test" />
+        <item itemvalue="Jest.see more.see more click" />
+        <item itemvalue="Jest.Test App" />
         <item itemvalue="Jest.Link changes the class when hovered" />
       </list>
     </recent_temporary>
@@ -109,7 +153,8 @@
       <updated>1617760731768</updated>
       <workItem from="1617760733043" duration="14734000" />
       <workItem from="1617779463424" duration="17000" />
-      <workItem from="1617845729738" duration="8928000" />
+      <workItem from="1617845729738" duration="9799000" />
+      <workItem from="1617933185507" duration="13531000" />
     </task>
     <task id="LOCAL-00001" summary="Base UI">
       <created>1617779215476</created>
@@ -118,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617779215476</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Base function">
+      <created>1617855425079</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617855425079</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +191,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base UI" />
+    <MESSAGE value="Base function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Base function" />
   </component>
 </project>

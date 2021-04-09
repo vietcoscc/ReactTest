@@ -16,6 +16,7 @@ export default class Home extends React.Component {
     }
 
     getNextData() {
+        console.log("getNextData")
         this.setState({
             currentPage: this.state.currentPage + 1
         });
@@ -59,21 +60,25 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" data-testid="container">
                 <ListImage items={this.state.items}/>
-                <SeeMore onClick={()=>{this.getNextData()}}/>
+                <SeeMore onClick={() => {
+                    this.getNextData()
+                }}/>
             </div>
         )
     }
 }
 
 function SeeMore(props) {
-    return (<div className="text-center">
-        <button className="btn btn-primary m-5" onClick={() => {
-            props.onClick()
-        }}>See more
-        </button>
-    </div>)
+    return (
+        <div className="text-center" >
+            <button data-testid="see-more" className="btn btn-primary m-5" onClick={() => {
+                props.onClick()
+            }}>See more
+            </button>
+        </div>
+    )
 }
 
 function ListImage(props) {
@@ -87,7 +92,7 @@ function ListImage(props) {
     }
 
     const items = props.items.map((item) =>
-        <div id="item" key={item.id}>
+        <div id="item" key={item.id} data-testid="image-item">
             <div className="row p-1">
                 <div className="col-md-2" onClick={() => {
                     viewDetail(item)
@@ -105,7 +110,7 @@ function ListImage(props) {
     );
 
     return (
-        <div>
+        <div data-testid="list-image">
             <div>
                 <h1 className="text-primary">Image list</h1>
             </div>
