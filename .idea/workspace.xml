@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2ec1d3f-43a0-40ad-bebb-0f9bcced855e" name="Default Changelist" comment="Base function">
-      <change afterPath="$PROJECT_DIR$/src/api/images.js" afterDir="false" />
+    <list default="true" id="c2ec1d3f-43a0-40ad-bebb-0f9bcced855e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/home/Home.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/home/Home.react.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,7 +152,8 @@
       <workItem from="1617760733043" duration="14734000" />
       <workItem from="1617779463424" duration="17000" />
       <workItem from="1617845729738" duration="9799000" />
-      <workItem from="1617933185507" duration="13531000" />
+      <workItem from="1617933185507" duration="13629000" />
+      <workItem from="1618193018839" duration="6930000" />
     </task>
     <task id="LOCAL-00001" summary="Base UI">
       <created>1617779215476</created>
@@ -170,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617855425079</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Common query function">
+      <created>1617948861451</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1617948861451</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +198,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base UI" />
     <MESSAGE value="Base function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base function" />
+    <MESSAGE value="Common query function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Common query function" />
   </component>
 </project>

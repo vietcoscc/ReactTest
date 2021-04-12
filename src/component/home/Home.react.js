@@ -1,6 +1,7 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
 import './Home.react.css';
+import {fetchImages} from "./../../api/images";
 
 export default class Home extends React.Component {
 
@@ -20,17 +21,7 @@ export default class Home extends React.Component {
         this.setState({
             currentPage: this.state.currentPage + 1
         });
-        const requestOpt = {
-            // method: 'POST',
-            headers: {
-                Authorization: this.state.apiKey
-            },
-            // body: JSON.stringify({title: 'React POST Request Example'})
-        };
-        fetch("https://api.pexels.com/v1/search?" +
-            "page=" + this.state.currentPage +
-            "&query=" + this.state.query +
-            "&per_page=" + this.state.perPage, requestOpt)
+        fetchImages(this.state.currentPage, 'nature', 3)
             .then(res => res.json())
             .then(res => {
                 console.log(res);
@@ -72,7 +63,7 @@ export default class Home extends React.Component {
 
 function SeeMore(props) {
     return (
-        <div className="text-center" >
+        <div className="text-center">
             <button data-testid="see-more" className="btn btn-primary m-5" onClick={() => {
                 props.onClick()
             }}>See more
@@ -94,7 +85,7 @@ function ListImage(props) {
     const items = props.items.map((item) =>
         <div id="item" key={item.id} data-testid="image-item">
             <div className="row p-1">
-                <div className="col-md-2" onClick={() => {
+                <div data-testid="image" className="col-md-2" onClick={() => {
                     viewDetail(item)
                 }}>
                     <img className="img-thumbnail" src={item.src.tiny} alt={"image"}/>

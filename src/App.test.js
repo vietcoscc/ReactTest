@@ -1,14 +1,11 @@
 import App from './App';
 import React from "react";
 import {fireEvent, render, screen, waitFor} from "@testing-library/react";
-import {fetchImages} from "./api/images";
+// import {fetchImages} from "./api/images";
+// jest.mock("./api/images");
 
-jest.mock("./api/images")
 test('first display test', async () => {
     render(<App/>);
-    expect(fetchImages).toHaveBeenCalledTimes(1);
-    expect(fetchImages).toHaveBeenCalledWith();
-
     const seeMore = screen.queryByTestId("see-more");
     const homeTitle = screen.queryByText("Image list");
     await waitFor(async () => {
