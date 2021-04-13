@@ -76,7 +76,7 @@ function ListImage(props) {
     const history = useHistory();
 
     function viewDetail(item) {
-        console.log(item)
+        console.log(item);
         history.push("/detail", {
             data: item
         })
