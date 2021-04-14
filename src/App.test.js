@@ -2,29 +2,69 @@ import App from './App';
 import React from "react";
 import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 
+const oldWindowLocation = window.location;
+beforeAll(() => {
+    delete window.location;
 
+    window.location = Object.defineProperties(
+        {},
+        {
+            ...Object.getOwnPropertyDescriptors(oldWindowLocation),
+            assign: {
+                configurable: true,
+                value: jest.fn(),
+            },
+        },
+    )
+});
+beforeEach(() => {
+    window.location.assign.mockReset()
+});
+afterAll(() => {
+    // restore `window.location` to the `jsdom` `Location` object
+    window.location = oldWindowLocation
+});
 describe('App', () => {
     test('Full flow test', async () => {
+        // Render all component
         render(<App/>);
 
+        //query title tag
         const homeTitle = screen.queryByText("Image list");
         expect(homeTitle).toBeInTheDocument();
 
-        const seeMore = screen.queryByTestId("see-more");
-        expect(seeMore).toHaveTextContent("See more");
 
+        //Wait for API call to display item
         await waitFor(async () => {
+            //find all image tag
             const imageItems = await screen.findAllByTestId("image-item");
-            expect(imageItems).toBeTruthy();
             imageItems.forEach(item => {
                 expect(item).toBeInTheDocument()
             })
         }, {timeout: 3000});
 
+        //query item see more
+        const seeMore = screen.queryByTestId("see-more");
+        expect(seeMore).toHaveTextContent("See more");
+
+        //find all image tag
+        const imageItems = await screen.findAllByTestId("image-item");
+        //Query button see more
+        const btnSeeMore = screen.queryByTestId("see-more");
+        //Emulate see more click
+        fireEvent.click(btnSeeMore);
+        await waitFor(async () => {
+
+            const afterClickItems = await screen.findAllByTestId("image-item");
+            expect(afterClickItems.length).toBe(imageItems.length + 3)
+        }, {timeout: 3000});
+
+        //Emulate click on image item
         const images = await screen.findAllByTestId("image");
         expect(images).toBeTruthy();
         fireEvent.click(images[0]);
 
+        //Detail
         const detailTitle = screen.queryByTestId("detail-title");
         expect(detailTitle).toBeInTheDocument();
         expect(detailTitle).toHaveTextContent("Detail");
@@ -65,6 +105,11 @@ describe('App', () => {
         const imageLiked = screen.queryByTestId("image-liked");
         expect(imageLiked).toBeInTheDocument();
         expect(imageLiked).toHaveTextContent('false')
+
+        const displayImage = screen.queryByTestId("display-image");
+        console.log(displayImage);
+        fireEvent.click(displayImage);
+        expect(window.location.assign).toBeCalledTimes(1);
     });
 
     test('See more test', async () => {

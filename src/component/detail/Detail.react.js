@@ -13,7 +13,7 @@ export default class Detail extends React.Component {
 
     render() {
         function viewOriginal(url) {
-            window.location.href = url
+            window.location.assign(url);
         }
 
         return (
@@ -23,7 +23,7 @@ export default class Detail extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-4">
-                        <img data-testid="image-detail" className="img-thumbnail" src={this.state.data.src.medium} onClick={() => {
+                        <img data-testid="display-image" className="img-thumbnail" src={this.state.data.src.medium} onClick={() => {
                             viewOriginal(this.state.data.src.original)
                         }}/>
                     </div>
