@@ -4,13 +4,15 @@
     <list default="true" id="c2ec1d3f-43a0-40ad-bebb-0f9bcced855e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/detail/Detail.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/detail/Detail.react.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="testapp" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,7 +32,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/component/detail" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../my-app" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -62,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="Jest.App">
     <configuration name="App" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -145,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.App.Full flow test" />
         <item itemvalue="Jest.App" />
+        <item itemvalue="Jest.App.Full flow test" />
         <item itemvalue="Jest..see more click" />
         <item itemvalue="Jest.see more" />
         <item itemvalue="Jest.Full flow test" />
@@ -169,7 +171,8 @@
       <workItem from="1617933185507" duration="13629000" />
       <workItem from="1618193018839" duration="7189000" />
       <workItem from="1618278606247" duration="9897000" />
-      <workItem from="1618364698470" duration="11696000" />
+      <workItem from="1618364698470" duration="11780000" />
+      <workItem from="1618452820506" duration="6256000" />
     </task>
     <task id="LOCAL-00001" summary="Base UI">
       <created>1617779215476</created>
@@ -206,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618295016973</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Complete test">
+      <created>1618382804170</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618382804171</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
