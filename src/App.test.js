@@ -1,9 +1,85 @@
 import App from './App';
 import React from "react";
-import {fireEvent, render, screen, waitFor, cleanup} from "@testing-library/react";
+import {fireEvent, render, screen, waitFor} from "@testing-library/react";
+import {rest} from 'msw'
+import {setupServer} from 'msw/node'
+
+const fakeImages = [{
+    "width": 3024,
+    "height": 3024,
+    "url": "https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/",
+    "photographer": "Joey Farina",
+    "photographer_url": "https://www.pexels.com/@joey",
+    "photographer_id": 680589,
+    "avg_color": "#978E82",
+    "src": {
+        "original": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
+        "large2x": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    },
+    "liked": false
+}, {
+    "width": 3024,
+    "height": 3024,
+    "url": "https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/",
+    "photographer": "Joey Farina",
+    "photographer_url": "https://www.pexels.com/@joey",
+    "photographer_id": 680589,
+    "avg_color": "#978E82",
+    "src": {
+        "original": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
+        "large2x": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    },
+    "liked": false
+}, {
+    "width": 3024,
+    "height": 3024,
+    "url": "https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/",
+    "photographer": "Joey Farina",
+    "photographer_url": "https://www.pexels.com/@joey",
+    "photographer_id": 680589,
+    "avg_color": "#978E82",
+    "src": {
+        "original": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
+        "large2x": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    },
+    "liked": false
+}];
+const fakeRes = {
+    page: 1,
+    per_page: 3,
+    photos: fakeImages,
+    total_results: 1111111,
+    next_page: 2,
+};
+
+const server = setupServer(
+
+);
 
 const oldWindowLocation = window.location;
+
 beforeAll(() => {
+    server.listen();
+
+    //
     delete window.location;
     window.location = Object.defineProperties(
         {},
@@ -16,23 +92,31 @@ beforeAll(() => {
         },
     )
 });
+
 beforeEach(() => {
-    window.location.assign.mockReset()
+    window.location.assign.mockReset();
 });
+
+
+afterEach(() => server.resetHandlers());
+
 afterAll(() => {
     // restore `window.location` to the `jsdom` `Location` object
     window.location = oldWindowLocation
+    server.close()
 });
-afterEach(cleanup);
+
 describe('App', () => {
-    test('Full flow test', async () => {
+    it('Full flow test', async () => {
+        server.use(rest.get("https://api.pexels.com/v1/search", (req, res, ctx) => {
+            return res(ctx.json(fakeRes))
+        }));
         // Render all component
         render(<App/>);
 
         //Check display home title
         const homeTitle = screen.queryByText("Image list");
         expect(homeTitle).toBeInTheDocument();
-
 
         //Wait for image API call
         await waitFor(async () => {
@@ -72,11 +156,6 @@ describe('App', () => {
 
         //Check image info
         const numberRegex = new RegExp('^[0-9]+$');
-
-        //Check ID
-        const imageId = screen.queryByTestId("image-id");
-        expect(imageId).toBeInTheDocument();
-        expect(imageId.innerHTML.toString()).toMatch(numberRegex);
 
         //Check Width
         const imageWidth = screen.queryByTestId("image-width");
@@ -124,23 +203,4 @@ describe('App', () => {
         //Check function call
         expect(window.location.assign).toBeCalledTimes(1);
     });
-
-    test('See more test', async () => {
-        render(<App/>);
-        await waitFor(async () => {
-            const imageItems = await screen.findAllByTestId("image-item");
-            expect(imageItems).toBeTruthy();
-            imageItems.forEach(item => {
-                expect(item).toBeInTheDocument()
-            })
-        }, {timeout: 3000});
-        const imageItems = await screen.findAllByTestId("image-item");
-        console.log(imageItems.length);
-        const btnSeeMore = screen.queryByTestId("see-more");
-        fireEvent.click(btnSeeMore);
-        await waitFor(async () => {
-            const afterClickItems = await screen.findAllByTestId("image-item");
-            expect(afterClickItems.length).toBe(imageItems.length + 3)
-        }, {timeout: 3000});
-    })
 });

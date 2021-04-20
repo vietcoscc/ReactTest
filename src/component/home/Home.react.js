@@ -11,20 +11,17 @@ export default class Home extends React.Component {
             currentPage: 1,
             perPage: 3,
             query: "nature",
-            apiKey: '563492ad6f9170000100000179a991b0d3c642ad9e30ab7930fb9c21',
             items: [],
         }
     }
 
     getNextData() {
-        console.log("getNextData")
         this.setState({
             currentPage: this.state.currentPage + 1
         });
         fetchImages(this.state.currentPage, 'nature', 3)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 const images = {
                     page: res.page,
                     per_page: res.per_page,
@@ -39,13 +36,9 @@ export default class Home extends React.Component {
                     }))
                 })
             })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
         this.getNextData();
     }
 
@@ -76,14 +69,13 @@ function ListImage(props) {
     const history = useHistory();
 
     function viewDetail(item) {
-        console.log(item);
         history.push("/detail", {
             data: item
         })
     }
 
-    const items = props.items.map((item) =>
-        <div id="item" key={item.id} data-testid="image-item">
+    const items = props.items.map((item, index) =>
+        <div id="item" key={index} data-testid="image-item">
             <div className="row p-1">
                 <div data-testid="image" className="col-md-2" onClick={() => {
                     viewDetail(item)
