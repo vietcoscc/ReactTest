@@ -106,7 +106,7 @@ afterAll(() => {
     server.close()
 });
 
-describe('App', () => {
+describe('App test', () => {
     it('Full flow test', async () => {
         server.use(rest.get("https://api.pexels.com/v1/search", (req, res, ctx) => {
             return res(ctx.json(fakeRes))
@@ -202,5 +202,8 @@ describe('App', () => {
         fireEvent.click(displayImage);
         //Check function call
         expect(window.location.assign).toBeCalledTimes(1);
+    });
+    it('View image detail test', function () {
+
     });
 });
