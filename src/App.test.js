@@ -212,7 +212,7 @@ describe('App test', () => {
         render(<Home/>);
 
         //Check display home title
-        const homeTitle = screen.getByText("Image list");
+        const homeTitle = screen.queryByText("Image list demo");
         expect(homeTitle).toBeInTheDocument();
 
         //Query button see more
