@@ -15,13 +15,15 @@ export default class Home extends React.Component {
         }
     }
 
-    getNextData() {
+    async getNextData() {
+        console.log("getNextData");
         this.setState({
             currentPage: this.state.currentPage + 1
         });
-        fetchImages(this.state.currentPage, 'nature', 3)
+         await fetchImages(this.state.currentPage, 'nature', 3)
             .then(res => res.json())
             .then(res => {
+                console.log("Success: " + res);
                 const images = {
                     page: res.page,
                     per_page: res.per_page,
@@ -36,6 +38,9 @@ export default class Home extends React.Component {
                     }))
                 })
             })
+            .catch(err => {
+                console.log("Error: " + err)
+            });
     }
 
     componentDidMount() {

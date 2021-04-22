@@ -1,8 +1,9 @@
-import App from './App';
 import React from "react";
 import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
+import Home from "./component/home/Home.react";
+import App from "./App";
 
 const fakeImages = [{
     "width": 3024,
@@ -70,16 +71,13 @@ const fakeRes = {
     next_page: 2,
 };
 
-const server = setupServer(
-
-);
+var server = setupServer();
 
 const oldWindowLocation = window.location;
 
 beforeAll(() => {
     server.listen();
 
-    //
     delete window.location;
     window.location = Object.defineProperties(
         {},
@@ -95,6 +93,8 @@ beforeAll(() => {
 
 beforeEach(() => {
     window.location.assign.mockReset();
+    server.resetHandlers();
+    document.body.innerHTML = "";
 });
 
 
@@ -107,7 +107,7 @@ afterAll(() => {
 });
 
 describe('App test', () => {
-    it('Full flow test', async () => {
+    test('Full success flow test', async () => {
         server.use(rest.get("https://api.pexels.com/v1/search", (req, res, ctx) => {
             return res(ctx.json(fakeRes))
         }));
@@ -203,7 +203,30 @@ describe('App test', () => {
         //Check function call
         expect(window.location.assign).toBeCalledTimes(1);
     });
-    it('View image detail test', function () {
 
+    test('Get image failed test', async function () {
+        server.use(rest.get("https://api.pexels.com/v1/search", (req, res, ctx) => {
+            return res(ctx.status(500))
+        }));
+        // Render Home component
+        render(<Home/>);
+
+        //Check display home title
+        const homeTitle = screen.getByText("Image list");
+        expect(homeTitle).toBeInTheDocument();
+
+        //Query button see more
+        const btnSeeMore = screen.queryByTestId("see-more");
+        //Simulate See more click
+        fireEvent.click(btnSeeMore);
+        //Wait for image API call
+        await waitFor(async () => {
+            try {
+                await screen.findAllByTestId("image-item")
+            } catch (e) {
+                // eslint-disable-next-line jest/no-conditional-expect
+                expect(e.name).toBe('TestingLibraryElementError');
+            }
+        }, {timeout: 3000});
     });
 });
